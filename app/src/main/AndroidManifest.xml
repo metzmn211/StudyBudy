@@ -32,5 +32,6 @@
             android:name=".activities.UsersListActivity"
             android:screenOrientation="portrait" />
     </application>
-
+    // done with all my parts
 </manifest>
+
