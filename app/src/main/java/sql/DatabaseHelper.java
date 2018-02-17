@@ -3,16 +3,10 @@ package sql;
 /**
  * Created by louis on 2/16/2018.
  */
-import android.content.ContentValues;
+
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import model.User;
-
-import java.util.ArrayList;
-import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -33,6 +27,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS" + TABLE_USER;
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, )
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(CREATE_USER_TABLE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db,int oldversion, int newVersion) {
+
+        db.execSQL(DROP_USER_TABLE);
     }
 }
