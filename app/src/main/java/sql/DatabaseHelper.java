@@ -7,6 +7,9 @@ package sql;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import model.User;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -39,5 +42,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db,int oldversion, int newVersion) {
 
         db.execSQL(DROP_USER_TABLE);
+
+        onCreate(db);
+    }
+
+    public void addUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
     }
 }
