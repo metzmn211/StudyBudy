@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">StudyBuddy</string>
+
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_home_menu">HomeMenu</string>
+    <string name="title_activity_take_quiz">TakeQuiz</string>
 </resources>
