@@ -15,8 +15,6 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     Button loginButton;
     EditText un, pw;
-    TextView tx1;
-    int counter = 3;
     //this creates an instance of DBHandler for later use
     DBHandler dbh;
 
@@ -24,16 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //This is a temporary button bypassing authentication
-        Button goToHomeScreen = (Button) findViewById(R.id.byPass);
-        goToHomeScreen.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(MainActivity.this, HomeScreen.class);
-                startActivity(intent);
-            }
-        });
 
         //instantiate the db
         dbh = new DBHandler(this);
@@ -46,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         un = findViewById(R.id.editText);
         pw = findViewById(R.id.editText2);
 
-        tx1 = findViewById(R.id.textView4);
-        tx1.setVisibility(View.GONE);
 
         //this is the click listener for the login button
         loginButton.setOnClickListener(new View.OnClickListener() {
