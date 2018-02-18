@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">StudyBudy</string>
+    <string name="login_button">Login</string>
 </resources>
