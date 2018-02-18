@@ -65,33 +65,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Snap username or password is incorrect!", Toast.LENGTH_LONG).show();
                 }
-                //if (ed1.getText().toString().equals("admin") &&
-                //        ed2.getText().toString().equals("admin")) {
-                    //Toast.makeText(getApplicationContext(),
-                      //      "Redirecting...", Toast.LENGTH_SHORT).show();
-                /*} else {
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
-
-                            tx1.setVisibility(View.VISIBLE);
-                    tx1.setBackgroundColor(Color.RED);
-                    counter--;
-                    tx1.setText(Integer.toString(counter));
-
-                    if (counter == 0) {
-                        b1.setEnabled(false);
-                    }
-
-}*/
             }
         });
-/*
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }*/
-
-} }
+    }
+}
 
