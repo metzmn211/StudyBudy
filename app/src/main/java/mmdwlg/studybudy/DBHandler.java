@@ -2,6 +2,8 @@ package mmdwlg.studybudy;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -21,6 +23,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COL_User = "userName";
     private static final String COL_Pass = "password";
 
+
     //this is the constructor
     public DBHandler(Context context) {
         super(context, DB_Name, null, DB_Version);
@@ -35,30 +38,49 @@ public class DBHandler extends SQLiteOpenHelper {
         //this will create the users table!
         db.execSQL(seakwull);
 
-        //this will add a dummy userName and pass
-        db = this.getWritableDatabase();
+        Log.d("WTF", "table created");
 
-        //insert the userName
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_User, "test");
-        long result = db.insert(TBL_Name, null, contentValues);
-
-        if (result == -1){
-            Log.d("myTag", "didnt work");
-        } else {
-            Log.d("myTag", "guess it worked");
-        }
-
-        //clear it
-        contentValues.clear();
-
-        //add in the pass
-        contentValues.put(COL_Pass, "pw");
-        db.insert(TBL_Name, null, contentValues);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        String drop = "DROP TABLE " + TBL_Name;
+        db.execSQL(drop);
+        Log.d("WTF", "table dropped");
+        onCreate(db);
+    }
+
+    public void addUser() {
+        //this will add a dummy userName and pass
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String seakwull = "INSERT INTO " + TBL_Name + "(" + COL_User + ", " + COL_Pass + ") VALUES('test', 'pw');";
+
+        //try to run it, catch the error and make a note in log
+        try {
+            db.execSQL(seakwull);
+        } catch(SQLException e) {
+            Log.d("ohNo", "oh no its broken");
+        }
+
+        //craft an SQL query to select from the users table
+        String whoa = "SELECT * FROM users";
+        //define a cursor to hold the results
+        Cursor c;
+        //run the query and pass the results to the cursor
+        c = db.rawQuery(whoa, null);
+
+        //move to the first spot in the cursor. This will just log the first userName and pass for now
+        c.moveToFirst();
+        String index = c.getString(0);
+        String theUser = c.getString(1);
+        String thePass = c.getString(2);
+
+        //here it is logging it to reference for login
+        Log.d("testData", "index: " + index + ", user name: " + theUser + ", password: " + thePass);
+
+        //close that cursor
+        c.close();
 
     }
 
