@@ -10,7 +10,7 @@ import android.util.Log;
 
 /**
  * Created by Danny on 2/17/2018.
- * This section creates the db and will be called when the app starts up
+ * This section creates the db and will be called when the app starts up as well as handling various login functions.
  */
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -38,7 +38,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //this will create the users table!
         db.execSQL(seakwull);
 
-        Log.d("WTF", "table created");
+        Log.d("msg", "table created");
 
     }
 
@@ -46,7 +46,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String drop = "DROP TABLE " + TBL_Name;
         db.execSQL(drop);
-        Log.d("WTF", "table dropped");
+        Log.d("msg", "table dropped");
         onCreate(db);
     }
 
@@ -81,6 +81,39 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //close that cursor
         c.close();
+
+    }
+
+    //this is for the authentication, values that are typed in will be passed here and referenced against the db of users.
+    public boolean authUser(String uN, String pW) {
+        //get a db to read from.
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean auth = false;
+
+        //craft an SQL query to select from the users table
+        String whoa = "SELECT * FROM users";
+        //define a cursor to hold the results
+        Cursor c;
+        //run the query and pass the results to the cursor
+        c = db.rawQuery(whoa, null);
+
+        //move to the first spot in the cursor. This will just log the first userName and pass for now
+        c.moveToFirst();
+        String theUser = c.getString(1);
+        String thePass = c.getString(2);
+
+        //this will check to see if they match and if so, return true to validate the login. false if not
+        if ((uN.equals(theUser)) && (pW.equals(thePass))) {
+            auth = true;
+        } else {
+            auth = false;
+        }
+
+        //close it up...
+        c.close();
+
+        //return our value
+        return auth;
 
     }
 
