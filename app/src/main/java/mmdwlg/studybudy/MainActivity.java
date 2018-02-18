@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DBHandler dbh = new DBHandler(this);
+
         b1 = findViewById(R.id.button);
         ed1 = findViewById(R.id.editText);
         ed2 = findViewById(R.id.editText2);
@@ -36,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Redirecting...", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Wrong
-                            Credentials",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
 
                             tx1.setVisibility(View.VISIBLE);
                     tx1.setBackgroundColor(Color.RED);
