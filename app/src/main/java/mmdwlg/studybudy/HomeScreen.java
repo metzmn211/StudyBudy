@@ -8,10 +8,16 @@ import android.widget.Button;
 
 public class HomeScreen extends AppCompatActivity {
 
+    DBQuestionHandler dbq;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        dbq = new DBQuestionHandler(this);
+        dbq.addUser();
+
       // Button to go to Take Quiz Screen
       Button goToTakeQuiz = (Button) findViewById(R.id.takeQuiz);
       goToTakeQuiz.setOnClickListener(new View.OnClickListener(){

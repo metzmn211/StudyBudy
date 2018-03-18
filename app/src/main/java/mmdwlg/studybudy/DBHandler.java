@@ -16,7 +16,7 @@ import android.util.Log;
 public class DBHandler extends SQLiteOpenHelper {
 
     //create and initialize some variables for the database creation
-    private static final int DB_Version = 1;
+    private static final int DB_Version = 2;
     private static final String DB_Name = "UserDB.db";
     private static final String TBL_Name = "users";
     private static final String COL_ID = "ID";
@@ -32,7 +32,7 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //this is initializing the SQL string to create the table
-        final String seakwull = "CREATE TABLE " + TBL_Name + "("
+        final String seakwull = "CREATE TABLE IF NOT EXISTS " + TBL_Name + "("
                 + COL_ID + " integer primary key, " + COL_User + " TEXT, " + COL_Pass + " TEXT);";
 
         //this will create the users table!
@@ -44,9 +44,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String drop = "DROP TABLE " + TBL_Name;
-        db.execSQL(drop);
-        Log.d("msg", "table dropped");
+        //String drop = "DROP TABLE " + TBL_Name;
+        //db.execSQL(drop);
+        Log.d("msg", "table dropped section");
         onCreate(db);
     }
 
@@ -54,14 +54,14 @@ public class DBHandler extends SQLiteOpenHelper {
         //this will add a dummy userName and pass
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String seakwull = "INSERT INTO " + TBL_Name + "(" + COL_User + ", " + COL_Pass + ") VALUES('test', 'pw');";
+        //String seakwull = "INSERT INTO " + TBL_Name + "(" + COL_User + ", " + COL_Pass + ") VALUES('test', 'pw');";
 
         //try to run it, catch the error and make a note in log
-        try {
-            db.execSQL(seakwull);
-        } catch(SQLException e) {
-            Log.d("ohNo", "oh no its broken");
-        }
+        //try {
+        //    db.execSQL(seakwull);
+        //} catch(SQLException e) {
+        //    Log.d("ohNo", "oh no its broken");
+        //}
 
         //craft an SQL query to select from the users table
         String whoa = "SELECT * FROM users";
@@ -99,14 +99,22 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //move to the first spot in the cursor. This will just log the first userName and pass for now
         c.moveToFirst();
-        String theUser = c.getString(1);
-        String thePass = c.getString(2);
 
-        //this will check to see if they match and if so, return true to validate the login. false if not
-        if ((uN.equals(theUser)) && (pW.equals(thePass))) {
-            auth = true;
-        } else {
-            auth = false;
+        Integer i = 0;
+
+        while (i < c.getCount()) {
+            String theUser = c.getString(1);
+            String thePass = c.getString(2);
+
+            //this will check to see if they match and if so, return true to validate the login. false if not
+            if ((uN.equals(theUser)) && (pW.equals(thePass))) {
+                auth = true;
+                break;
+            } else {
+                auth = false;
+                i++;
+                c.moveToNext();
+            }
         }
 
         //close it up...

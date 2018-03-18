@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean auth = dbh.authUser(un.getText().toString(), pw.getText().toString());
 
                 //if it is true we shall travel to the home screen
-                if (auth == true) {
+                if (auth) {
                     Intent intent = new Intent(MainActivity.this, HomeScreen.class);
                     startActivity(intent);
                 //if not an error is displayed...
