@@ -77,9 +77,27 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
 
     void addUser() {
 
-
+        /*
         //test data
         Log.d("msg", "just some test data");
+
+        String update = "DELETE FROM users";
+        try {
+            db.execSQL(update);
+            Log.d("ok", "successfully deleted");
+        } catch(SQLException e) {
+            Log.d("ohNo", "delete all didnt work");
+        }
+
+        String add = "INSERT INTO users (userName, password) VALUES ('test', 'pw'), ('dw', 'pw')";
+        try {
+            db.execSQL(add);
+            Log.d("ok", "successfully added users");
+        } catch(SQLException e) {
+            Log.d("ohNo", "did not add users");
+        }
+        */
+
 
         //
         //SQLiteDatabase db = this.getWritableDatabase();
