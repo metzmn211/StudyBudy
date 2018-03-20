@@ -15,8 +15,10 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        //this creates a new instance of the class
         dbq = new DBQuestionHandler(this);
-        dbq.addUser();
+        //this calls a random function to load data into the db. i am commenting it out for now.
+        //dbq.addUser();
 
       // Button to go to Take Quiz Screen
       Button goToTakeQuiz = (Button) findViewById(R.id.takeQuiz);

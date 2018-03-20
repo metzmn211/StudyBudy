@@ -75,6 +75,8 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //this is a dummy section for now that is called on load for the menu. It has queries to add in questions and holds some others
+    //for later reference.
     void addUser() {
 
         /*
@@ -97,6 +99,20 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
             Log.d("ohNo", "did not add users");
         }
         */
+
+        String add = "INSERT INTO questions (questionSet, question, a, b, c, d, answer, questionCat) " +
+                "VALUES " +
+                "('testData', 'What is 1 + 1?', '2', '42', '0', '6', 'a', 'math'), " +
+                "('testData', 'What is the meaning of life, the universe, and everything?', 'ignorance = bliss', '42', 'programming', 'ale', 'b', 'philosophy'), " +
+                "('testData', 'Are there still more questions?', 'yes', 'no', 'unsure', 'huh?', 'c', 'general'), " +
+                "('testData', 'Last question', 'Great', '42', '2', 'This is not a question?', 'd', 'trick')";
+
+        try {
+            db.execSQL(add);
+            Log.d("ok", "successfully added questions");
+        } catch(SQLException e) {
+            Log.d("ohNo", "oh it didnt work");
+        }
 
 
         //
