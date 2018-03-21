@@ -14,8 +14,8 @@ import android.util.Log;
 public class DBQuestionHandler extends SQLiteOpenHelper {
 
     //create and initialize some variables for the database creation
-    private static final int DB_Version = 2;
-    private static final String DB_Name = "UserDB.db";
+    private static final int DB_Version = 1;
+    private static final String DB_Name = "QuestionDB.db";
     private static final String TBL_Name = "questions";
     private static final String COL_ID = "ID";
     private static final String COL_Set = "questionSet";
@@ -59,11 +59,26 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
 
         try {
             db.execSQL(seakwull);
+            Log.d("msg", "table created");
             } catch(SQLException e) {
             Log.d("ohNo", "oh no its broken");
         }
 
-        Log.d("msg", "table created");
+
+
+        String add = "INSERT INTO questions (questionSet, question, a, b, c, d, answer, questionCat) " +
+                "VALUES " +
+                "('testData', 'What is 1 + 1?', '2', '42', '0', '6', 'a', 'math'), " +
+                "('testData', 'What is the meaning of life, the universe, and everything?', 'ignorance = bliss', '42', 'programming', 'ale', 'b', 'philosophy'), " +
+                "('testData', 'Are there still more questions?', 'yes', 'no', 'unsure', 'huh?', 'c', 'general'), " +
+                "('testData', 'Last question', 'Great', '42', '2', 'This is not a question?', 'd', 'trick')";
+
+        try {
+            db.execSQL(add);
+            Log.d("ok", "successfully added questions");
+        } catch(SQLException e) {
+            Log.d("ohNo", "oh it didnt work");
+        }
 
     }
 

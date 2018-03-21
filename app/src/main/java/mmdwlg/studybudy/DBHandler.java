@@ -16,7 +16,7 @@ import android.util.Log;
 public class DBHandler extends SQLiteOpenHelper {
 
     //create and initialize some variables for the database creation
-    private static final int DB_Version = 2;
+    private static final int DB_Version = 1;
     private static final String DB_Name = "UserDB.db";
     private static final String TBL_Name = "users";
     private static final String COL_ID = "ID";
@@ -36,9 +36,24 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COL_ID + " integer primary key, " + COL_User + " TEXT, " + COL_Pass + " TEXT);";
 
         //this will create the users table!
-        db.execSQL(seakwull);
+        try {
+            db.execSQL(seakwull);
+            Log.d("msg", "table created");
+        } catch(SQLException e) {
+            Log.d("ohNo", "table not created");
+        }
 
-        Log.d("msg", "table created");
+        String addTestUser = "INSERT INTO " + TBL_Name + "(" + COL_User + ", " + COL_Pass + ") VALUES('test', 'pw');";
+
+        //try to run it, catch the error and make a note in log
+        try {
+            db.execSQL(addTestUser);
+            Log.d("msg", "users added into table");
+        } catch(SQLException e) {
+            Log.d("ohNo", "oh no its broken");
+        }
+
+
 
     }
 
@@ -54,14 +69,15 @@ public class DBHandler extends SQLiteOpenHelper {
         //this will add a dummy userName and pass
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //String seakwull = "INSERT INTO " + TBL_Name + "(" + COL_User + ", " + COL_Pass + ") VALUES('test', 'pw');";
+        String seakwull = "INSERT INTO " + TBL_Name + "(" + COL_User + ", " + COL_Pass + ") VALUES('test', 'pw');";
 
         //try to run it, catch the error and make a note in log
-        //try {
-        //    db.execSQL(seakwull);
-        //} catch(SQLException e) {
-        //    Log.d("ohNo", "oh no its broken");
-        //}
+        try {
+            db.execSQL(seakwull);
+            Log.d("msg", "users added into table");
+        } catch(SQLException e) {
+            Log.d("ohNo", "oh no its broken");
+        }
 
         //craft an SQL query to select from the users table
         String whoa = "SELECT * FROM users";

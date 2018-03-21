@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         dbh = new DBHandler(this);
         //this is a temporary function to add in a dummy username and pass
         //this can be built onto later to create new users.
-        dbh.addUser();
+        //dbh.addUser();
 
         //this defines the login button.
         loginButton = findViewById(R.id.button);
