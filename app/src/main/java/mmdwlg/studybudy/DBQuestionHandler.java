@@ -2,6 +2,7 @@ package mmdwlg.studybudy;
 
 import android.content.Context;
 //import android.database.Cursor;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -90,8 +91,90 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void getQuestionSets() {
+
+        //this calls the database
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //define a cursor to query and hold the results
+        Cursor setCurse = db.query(true, "questions", new String[] { "questionSet" }, null, null, null, null, null, null);
+
+        //this loop will go through the cursor and pull all the question set names
+        //this logic can be modified and built into takeQuiz.java - we can return the cursor and pull the
+        //sets, or build them into an array here and return the array - that might be easier
+        if (setCurse.moveToFirst()) {
+            do {
+                String set = setCurse.getString(setCurse.getColumnIndex("questionSet"));
+                //this just logs the results so you can see what we are working with.
+                //there is only one set in the test data now
+                Log.d("theSet", set);
+            } while (setCurse.moveToNext());
+        }
+        //close the cursor and free the resources.
+        setCurse.close();
+
+    }
+
+    //this section will take the clicked on value as displayed in getQuestionSets() - the quiz set the users wishes to take
+    //it will then run a query and return all the questions, answers, etc.
+    public void takeTheQuiz(String theSet) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //NOTE - this variable is hard coded in for now - we need to get it from the view
+        //it is hardcoded with nonsense in takequiz.java function call
+        theSet = "testData";
+
+        Cursor getQuestions = db.query(
+                "questions", //pull from table questions
+                null, //this will return all columns
+                "questionSet == theSet", //conditional statement
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        //similar to the above function, this will look through the cursor.
+        //this is a counter to organize the questions
+        Integer i = 1;
+        if (getQuestions.moveToFirst()) {
+            do {
+                //this grabs the question and logs it for you to see
+                String question = getQuestions.getString(getQuestions.getColumnIndex("question"));
+                Log.d("question" + i, question);
+
+                //these next few sections grab the potential answers
+                String a = getQuestions.getString(getQuestions.getColumnIndex("a"));
+                Log.d("a" + i, a);
+
+                String b = getQuestions.getString(getQuestions.getColumnIndex("b"));
+                Log.d("b" + i, b);
+
+                String c = getQuestions.getString(getQuestions.getColumnIndex("c"));
+                Log.d("c" + i, c);
+
+                String d = getQuestions.getString(getQuestions.getColumnIndex("d"));
+                Log.d("d" + i, d);
+
+                //this is the right answer
+                String answer = getQuestions.getString(getQuestions.getColumnIndex("answer"));
+                Log.d("answer" + i, answer);
+
+                //future functionality - this is the question category for sorting
+                String cat = getQuestions.getString(getQuestions.getColumnIndex("questionCat"));
+                Log.d("cat" + i, cat);
+            } while (getQuestions.moveToNext());
+        }
+
+
+
+        getQuestions.close();
+    }
+
     //this is a dummy section for now that is called on load for the menu. It has queries to add in questions and holds some others
     //for later reference.
+    //DONT CALL THIS - just a holder for queries in the future.
     void addUser() {
 
         /*
