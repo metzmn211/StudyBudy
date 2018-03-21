@@ -128,7 +128,7 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
         Cursor getQuestions = db.query(
                 "questions", //pull from table questions
                 null, //this will return all columns
-                "questionSet == theSet", //conditional statement
+                "questionSet = '" + theSet + "'", //conditional statement
                 null,
                 null,
                 null,
@@ -164,6 +164,9 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
                 //future functionality - this is the question category for sorting
                 String cat = getQuestions.getString(getQuestions.getColumnIndex("questionCat"));
                 Log.d("cat" + i, cat);
+
+                i++;
+
             } while (getQuestions.moveToNext());
         }
 
