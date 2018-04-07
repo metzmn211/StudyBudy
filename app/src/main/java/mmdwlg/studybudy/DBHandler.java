@@ -23,12 +23,15 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COL_User = "userName";
     private static final String COL_Pass = "password";
 
-
     //this is the constructor
     public DBHandler(Context context) {
         super(context, DB_Name, null, DB_Version);
     }
 
+    // <('o'<) <('o')> (>'o')> <('o')> <('o'<) <('o')> (>'o')> <('o')> <('o'<) <('o')> (>'o')>
+    // This is the onCreate function. This is only called if the database has never been created.
+    // This can be problematic with editing databases on the project so we can work around it.
+    // <('o'<) <('o')> (>'o')> <('o')> <('o'<) <('o')> (>'o')> <('o')> <('o'<) <('o')> (>'o')>
     @Override
     public void onCreate(SQLiteDatabase db) {
         //this is initializing the SQL string to create the table
@@ -43,18 +46,16 @@ public class DBHandler extends SQLiteOpenHelper {
             Log.d("ohNo", "table not created");
         }
 
+        //this will add in our test username and password.
         String addTestUser = "INSERT INTO " + TBL_Name + "(" + COL_User + ", " + COL_Pass + ") VALUES('test', 'pw');";
 
-        //try to run it, catch the error and make a note in log
+        //try to run it to add in the user, catch the error and make a note in log
         try {
             db.execSQL(addTestUser);
             Log.d("msg", "users added into table");
         } catch(SQLException e) {
             Log.d("ohNo", "oh no its broken");
         }
-
-
-
     }
 
     @Override

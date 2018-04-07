@@ -27,6 +27,7 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
     private static final String COL_d = "d";
     private static final String COL_Answer = "answer";
     private static final String COL_Category = "questionCat";
+    private static final String COL_theUser = "userName";
 
     private SQLiteDatabase db;
     //SQLiteOpenHelper db;
@@ -37,7 +38,7 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
 
         super(context, DB_Name, null, DB_Version);
 
-        db = getWritableDatabase();
+        //db = getWritableDatabase();
 
     }
 
@@ -53,7 +54,8 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
                 + COL_c + " TEXT, "
                 + COL_d + " TEXT, "
                 + COL_Answer + " TEXT, "
-                + COL_Category + " TEXT);";
+                + COL_Category + " TEXT, "
+                + COL_theUser + " TEXT);";
 
         //this will create the questions table!
         db.execSQL(seakwull);
@@ -61,18 +63,17 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
         try {
             db.execSQL(seakwull);
             Log.d("msg", "table created");
-            } catch(SQLException e) {
+        } catch(SQLException e) {
             Log.d("ohNo", "oh no its broken");
         }
 
-
-
-        String add = "INSERT INTO questions (questionSet, question, a, b, c, d, answer, questionCat) " +
+        //this will populate the table with some dummy data for testing
+        String add = "INSERT INTO questions (questionSet, question, a, b, c, d, answer, questionCat, userName) " +
                 "VALUES " +
-                "('testData', 'What is 1 + 1?', '2', '42', '0', '6', 'a', 'math'), " +
-                "('testData', 'What is the meaning of life, the universe, and everything?', 'ignorance = bliss', '42', 'programming', 'ale', 'b', 'philosophy'), " +
-                "('testData', 'Are there still more questions?', 'yes', 'no', 'unsure', 'huh?', 'c', 'general'), " +
-                "('testData', 'Last question', 'Great', '42', '2', 'This is not a question?', 'd', 'trick')";
+                "('testData', 'What is 1 + 1?', '2', '42', '0', '6', 'a', 'math', 'test'), " +
+                "('testData', 'What is the meaning of life, the universe, and everything?', 'ignorance = bliss', '42', 'programming', 'ale', 'b', 'philosophy', 'test'), " +
+                "('testData', 'Are there still more questions?', 'yes', 'no', 'unsure', 'huh?', 'c', 'general', 'test'), " +
+                "('testData', 'Last question', 'Great', '42', '2', 'This is not a question?', 'd', 'trick', 'test')";
 
         try {
             db.execSQL(add);
@@ -85,13 +86,14 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //String drop = "DROP TABLE " + TBL_Name;
-        //db.execSQL(drop);
+        String drop = "DROP TABLE " + TBL_Name;
+        db.execSQL(drop);
         Log.d("msg", "table dropped section");
         onCreate(db);
     }
 
     public void getQuestionSets() {
+
 
         //this calls the database
         SQLiteDatabase db = this.getReadableDatabase();
@@ -164,6 +166,10 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
                 //future functionality - this is the question category for sorting
                 String cat = getQuestions.getString(getQuestions.getColumnIndex("questionCat"));
                 Log.d("cat" + i, cat);
+
+                //future functionality - this is the user column so we can sort questions by users
+                String user = getQuestions.getString(getQuestions.getColumnIndex("userName"));
+                Log.d("user" + i, user);
 
                 i++;
 
