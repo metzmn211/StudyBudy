@@ -1,31 +1,70 @@
 package mmdwlg.studybudy;
 
-/**
- * Created by louis on 3/16/2018.
- */
-
 public class Question {
-    private int mTextResId;
-    private boolean mAnswerTrue;
+    private String question;
+    private String option1;
+    private String option2;
+    private String option3;
+    private String option4;
+    private int answerNr;
 
-    public Question(int textResId, boolean answerTrue) {
-        mTextResId = textResId;
-        mAnswerTrue = answerTrue;
+    public Question() {
     }
 
-    public int getTextResId() {
-        return mTextResId;
+    public Question(String question, String option1, String option2, String option3, String option4, int answerNr) {
+        this.question = question;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.answerNr = answerNr;
     }
 
-    public void setTextResId(int textResId) {
-        mTextResId = textResId;
+    public String getQuestion() {
+        return question;
     }
 
-    public boolean isAnswerTrue() {
-        return mAnswerTrue;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public void setAnswerTrue(boolean answerTrue) {
-        mAnswerTrue = answerTrue;
+    public String getOption1() {
+        return option1;
+    }
+
+    public void setOption1(String option1) {
+        this.option1 = option1;
+    }
+
+    public String getOption2() {
+        return option2;
+    }
+
+    public void setOption2(String option2) {
+        this.option2 = option2;
+    }
+
+    public String getOption3() {
+        return option3;
+    }
+
+    public void setOption3(String option3) {
+        this.option3 = option3;
+    }
+
+    public String getOption4() {
+        return option4;
+    }
+
+    public void setOption4(String option4) {
+        this.option4 = option4;
+    }
+
+    public int getAnswerNr() {
+        return answerNr;
+    }
+
+    public void setAnswerNr(int answerNr) {
+        this.answerNr = answerNr;
     }
 }

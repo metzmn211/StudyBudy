@@ -25,16 +25,33 @@ public class TakeQuiz extends AppCompatActivity {
         dbq.getQuestionSets();
 
         dbq.takeTheQuiz("testDeleteMeLater");
-
-        // Button to return to home screen
-        Button goToHomeScreen = (Button) findViewById(R.id.home);
-        goToHomeScreen.setOnClickListener(new View.OnClickListener(){
-
+        //button to return to home screen
+        Button buttonHome = findViewById(R.id.home);
+        buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                Intent intent = new Intent(TakeQuiz.this, HomeScreen.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                goHome();
+            }
+        });
+        // button to take quiz
+        Button buttonTakeQuiz = findViewById(R.id.takeQuiz);
+        buttonTakeQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startQuiz();
             }
         });
     }
+
+    private void goHome() {
+        Intent intent = new Intent(TakeQuiz.this, HomeScreen.class);
+        startActivity(intent);
+    }
+
+    private void startQuiz() {
+        Intent intent = new Intent(TakeQuiz.this, QuizActivity.class);
+        startActivity(intent);
+
+    }
 }
+
