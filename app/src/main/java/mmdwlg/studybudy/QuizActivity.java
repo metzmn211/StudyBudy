@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class QuizActivity extends AppCompatActivity {
 
+    //variables
     private TextView textViewQuestion;
     private TextView textViewScore;
     private TextView textViewQuestionCount;
@@ -38,10 +39,10 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
     }
-
+    //when confirm is pressed and move on to next question
     private void showNextQuestion() {
         rbGroup.clearCheck();
-
+        //making sure were not going over question count
         if (questionCounter < questionCountTotal) {
             currentQuestion = questionList.get(questionCounter);
 
@@ -54,6 +55,7 @@ public class QuizActivity extends AppCompatActivity {
             textViewQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
             buttonConfirmNext.setText("Confirm");
             }
+            //if it was last question end the quiz
             else {
             finishQuiz();
         }

@@ -51,6 +51,4 @@
         app:layout_constraintTop_toBottomOf="@+id/takeQuiz"
         />
 
-
-    <!--edited by louis griffis on 4/7/18-->
 </android.support.constraint.ConstraintLayout>

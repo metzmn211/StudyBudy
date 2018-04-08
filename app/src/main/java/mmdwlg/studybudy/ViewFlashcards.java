@@ -26,15 +26,33 @@ public class ViewFlashcards extends AppCompatActivity {
 
         dbf.viewTheFlashcards("testDeleteMeLater");
 
-        // Button to return to home screen
-        Button goToHomeScreen = (Button) findViewById(R.id.home);
-        goToHomeScreen.setOnClickListener(new View.OnClickListener(){
-
+        //button to return to home screen
+        Button buttonHome = findViewById(R.id.home);
+        buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                Intent intent = new Intent(ViewFlashcards.this, HomeScreen.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                goHome();
+            }
+        });
+        // button to view flashcards
+        Button buttonTakeQuiz = findViewById(R.id.viewCards);
+        buttonTakeQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewCards();
             }
         });
     }
+
+    private void goHome() {
+        Intent intent = new Intent(ViewFlashcards.this, HomeScreen.class);
+        startActivity(intent);
+    }
+
+    private void viewCards() {
+        Intent intent = new Intent(ViewFlashcards.this, FlashCardsActivity.class);
+        startActivity(intent);
+
+    }
 }
+
