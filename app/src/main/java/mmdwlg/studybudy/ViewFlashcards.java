@@ -24,7 +24,7 @@ public class ViewFlashcards extends AppCompatActivity {
         //e.g., "Test 1", "Midterm", etc.
         dbf.getFlashcardSets();
 
-        //dbf.takeTheQuiz("testDeleteMeLater");
+        dbf.viewTheFlashcards("testDeleteMeLater");
 
         // Button to return to home screen
         Button goToHomeScreen = (Button) findViewById(R.id.home);

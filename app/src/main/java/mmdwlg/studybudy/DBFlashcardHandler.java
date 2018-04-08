@@ -20,7 +20,7 @@ public class DBFlashcardHandler extends SQLiteOpenHelper{
     private static final String COL_flashSet = "flashcardSet";
     private static final String COL_ques = "flashQ";
     private static final String COL_ans = "flashA";
-    private static final String COL_Category = "quesCat";
+    private static final String COL_Category = "flashCat";
     private static final String COL_theUser = "userName";
 
     private SQLiteDatabase db;
@@ -56,7 +56,7 @@ public class DBFlashcardHandler extends SQLiteOpenHelper{
         }
 
         //this will populate the table with some dummy data for testing
-        String addFlash = "INSERT INTO flashcards (flashcardSet, flashQ, flashA, quesCat, userName) " +
+        String addFlash = "INSERT INTO flashcards (flashcardSet, flashQ, flashA, flashCat, userName) " +
                 "VALUES " +
                 "('testData', 'What is 1 + 1?', '2', 'math', 'test'), " +
                 "('testData', 'What is the meaning of life, the universe, and everything?', '42', 'philosophy', 'test'), " +
@@ -105,5 +105,54 @@ public class DBFlashcardHandler extends SQLiteOpenHelper{
 
     }
 
+    //this section will take the clicked on value as displayed in getFlashCardSets() - the flashcard
+    //set the users wishes to take
+    //it will then run a query and return all the questions and answers for the flashcards
+    public void viewTheFlashcards(String theSet) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //NOTE - this variable is hard coded in for now - we need to get it from the view
+        //it is hardcoded with nonsense in ViewFlashcards.java function call
+        theSet = "testData";
+
+        Cursor getFlashcards = db.query(
+                "flashcards", //pull from table questions
+                null, //this will return all columns
+                "flashcardSet = '" + theSet + "'", //conditional statement
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        //similar to the above function, this will look through the cursor.
+        //this is a counter to organize the questions
+        Integer i = 1;
+        if (getFlashcards.moveToFirst()) {
+            do {
+                //this grabs the question and logs it for you to see
+                String question = getFlashcards.getString(getFlashcards.getColumnIndex("flashQ"));
+                Log.d("flashcard question" + i, question);
+
+                //these next few sections grab the potential answers
+                String answer = getFlashcards.getString(getFlashcards.getColumnIndex("flashA"));
+                Log.d("flashcard answer" + i, answer);
+
+                //future functionality - this is the question category for sorting
+                String cat = getFlashcards.getString(getFlashcards.getColumnIndex("flashCat"));
+                Log.d("flashcard category" + i, cat);
+
+                //future functionality - this is the user column so we can sort questions by users
+                String user = getFlashcards.getString(getFlashcards.getColumnIndex("userName"));
+                Log.d("user" + i, user);
+
+                i++;
+
+            } while (getFlashcards.moveToNext());
+        }
+
+        getFlashcards.close();
+    }
 
 }
