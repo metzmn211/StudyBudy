@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class TakeQuiz extends AppCompatActivity {
 
-    //declare the class
+    //create the question handler
     DBQuestionHandler dbq;
 
     @Override

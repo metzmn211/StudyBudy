@@ -86,10 +86,10 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String drop = "DROP TABLE " + TBL_Name;
-        db.execSQL(drop);
-        Log.d("msg", "table dropped section");
-        onCreate(db);
+        //String drop = "DROP TABLE " + TBL_Name;
+        //db.execSQL(drop);
+        Log.d("msg", "questions on upgrade section");
+        //onCreate(db);
     }
 
     public void getQuestionSets() {
