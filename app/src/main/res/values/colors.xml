@@ -5,6 +5,12 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorBackground">#b2b2b2</color>
     <color name="colorText">#FFFFFF</color>
+    <color name="colorBackground_5">#00FFFF</color>
+    <color name="colorBackground_4">#00F000</color>
+    <color name="colorBackground_3">#00FFCC</color>
+    <color name="colorBackground_1">#33FF00</color>
+    <color name="colorBackground_2">#00FF66</color>
+    <color name="colorBackground_6">#3366FF</color>
     <!--made a change to the colors used in the project-->
 
     <color name="black_overlay">#66000000</color>
