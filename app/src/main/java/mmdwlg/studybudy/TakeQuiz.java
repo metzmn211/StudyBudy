@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 public class TakeQuiz extends AppCompatActivity {
 
@@ -41,7 +43,14 @@ public class TakeQuiz extends AppCompatActivity {
                 startQuiz();
             }
         });
+
+        Spinner dropdown = findViewById(R.id.spinner_category);
+        String[] categories = new String[]{"Math", "English", "Science"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
+        dropdown.setAdapter(adapter);
     }
+
+
 
     private void goHome() {
         Intent intent = new Intent(TakeQuiz.this, HomeScreen.class);
