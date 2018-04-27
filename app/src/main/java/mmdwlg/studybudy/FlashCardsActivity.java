@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class FlashCardsActivity extends AppCompatActivity {
 
+    private Button buttonConfirmNext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,21 @@ public class FlashCardsActivity extends AppCompatActivity {
                 answer.setVisibility(View.VISIBLE);
             }
         });
+
+        buttonConfirmNext = findViewById(R.id.button_confirm_next);
+        buttonConfirmNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    showNextCard();
+
+            }
+        });
+
+    }
+
+    private void showNextCard(){
+
     }
 
 }
