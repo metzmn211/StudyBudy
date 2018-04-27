@@ -44,6 +44,7 @@ public class TakeQuiz extends AppCompatActivity {
             }
         });
 
+        //spinner values
         Spinner dropdown = findViewById(R.id.spinner_category);
         String[] categories = new String[]{"Math", "English", "Science"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
