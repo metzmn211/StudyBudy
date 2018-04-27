@@ -92,7 +92,7 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
         //onCreate(db);
     }
 
-    public void getQuestionSets() {
+    public Cursor getQuestionSets() {
 
 
         //this calls the database
@@ -101,6 +101,8 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
         //define a cursor to query and hold the results
         Cursor setCurse = db.query(true, "questions", new String[] { "questionSet" }, null, null, null, null, null, null);
 
+        return setCurse;
+        /*
         //this loop will go through the cursor and pull all the question set names
         //this logic can be modified and built into takeQuiz.java - we can return the cursor and pull the
         //sets, or build them into an array here and return the array - that might be easier
@@ -112,8 +114,10 @@ public class DBQuestionHandler extends SQLiteOpenHelper {
                 Log.d("theSet", set);
             } while (setCurse.moveToNext());
         }
+
         //close the cursor and free the resources.
         setCurse.close();
+        */
 
     }
 

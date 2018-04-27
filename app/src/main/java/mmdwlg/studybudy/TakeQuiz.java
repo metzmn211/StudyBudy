@@ -1,8 +1,10 @@
 package mmdwlg.studybudy;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,9 +26,23 @@ public class TakeQuiz extends AppCompatActivity {
         //this section will use the function to pull the information on all the quiz "sets"
         //I am thinking a set is a related set of questions, so we would want to display each of them
         //e.g., "Test 1", "Midterm", etc.
-        dbq.getQuestionSets();
+        Cursor qSCursor = dbq.getQuestionSets();
 
-        dbq.takeTheQuiz("testDeleteMeLater");
+        if (qSCursor.moveToFirst()) {
+            do {
+                String set = qSCursor.getString(qSCursor.getColumnIndex("questionSet"));
+                //this just logs the results so you can see what we are working with.
+                //there is only one set in the test data now
+                Log.d("theSet", set);
+            } while (qSCursor.moveToNext());
+        }
+
+        //close the cursor and free the resources.
+        qSCursor.close();
+
+        //turned off for now with testing to return the question sets - DW
+        //dbq.takeTheQuiz("testDeleteMeLater");
+
         //button to return to home screen
         Button buttonHome = findViewById(R.id.home);
         buttonHome.setOnClickListener(new View.OnClickListener() {
